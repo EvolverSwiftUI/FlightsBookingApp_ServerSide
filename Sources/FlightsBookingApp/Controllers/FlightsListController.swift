@@ -1,0 +1,90 @@
+//
+//  FlightsListController.swift
+//  FlightsBookingApp
+//
+//  Created by Sivaram Yadav on 2/14/22.
+//
+
+import Foundation
+import PerfectLib
+import PerfectHTTP
+import PerfectHTTPServer
+
+class FlightsListController {
+    
+    func handleFlightsListRequest(request: HTTPRequest, response: HTTPResponse) {
+        do {
+            try response
+                .setBody(json: getFlightsList())
+                .setHeader(.contentType, value: "application/json")
+                .completed(status: .ok)
+        } catch {
+            response.setBody(string: "Something went wrong")
+                .completed(status: .internalServerError)
+        }
+    }
+}
+
+func getFlightsList() -> [[String: Any]] {
+    return [
+        ["id":1001,
+         "flightNumber": "AI323",
+         "company": "Air India",
+         "fare": 27637,
+         "stops": 0,
+         "departure":"06:30",
+         "arrival": "11:30",
+         "duration": "9h 30m",
+         "sourceCode":"BOM",
+         "destinationCode": "LHR",
+         "source":"Mumbai",
+         "destination":"London"],
+        ["id":1002,
+         "flightNumber": "VI116",
+         "company": "Vistara",
+         "fare": 28613,
+         "stops": 1,
+         "departure":"20:55",
+         "arrival": "08:15",
+         "duration": "33h",
+         "sourceCode":"BOM",
+         "destinationCode": "LHR",
+         "source":"Mumbai",
+         "destination":"London"],
+        ["id":1003,
+         "flightNumber": "LF342",
+         "company": "Lufthansa",
+         "fare": 36282,
+         "stops": 0,
+         "departure":"02:50",
+         "arrival": "14:40",
+         "duration": "16h 20m",
+         "sourceCode":"BOM",
+         "destinationCode": "LHR",
+         "source":"Mumbai",
+         "destination":"London"],
+        ["id":1004,
+         "flightNumber": "EH773",
+         "company": "Etihad Airways",
+         "fare": 141628,
+         "stops": 2,
+         "departure":"02:50",
+         "arrival": "16:25",
+         "duration": "18h 05m",
+         "sourceCode":"BOM",
+         "destinationCode": "LHR",
+         "source":"Mumbai",
+         "destination":"London"],
+        ["id":1005,
+         "flightNumber": "BR343",
+         "company": "British Airways",
+         "fare": 148936,
+         "stops": 1,
+         "departure":"20:55",
+         "arrival": "15:20",
+         "duration": "51h",
+         "sourceCode":"BOM",
+         "destinationCode": "LHR",
+         "source":"Mumbai",
+         "destination":"London"]]
+}
